@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/11 18:07:50 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/12 17:15:42 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 //LIBFT
 # include "libft/libft.h"
 // # include "libreadline.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 // readline, rl_clear_history, rl_on_new_line, 
 //	rl_replace_line, rl_redisplay, add_history
 # include <stdio.h>
@@ -60,7 +62,6 @@ typedef struct s_cmd
 	char	*cmd;
 	char	*flag;
 	char	**args;
-	int		argnum;
 }	t_cmd;
 
 int	lexer(char *input);
