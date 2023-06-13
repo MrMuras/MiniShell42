@@ -6,22 +6,22 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:13:23 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/13 18:54:59 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/13 20:04:42 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int	parsing(t_cmd *cmd, int index)
+int	parsing(t_cmd *cmd)
 {
-	if (cmd_validation(cmd, index) == 1)
-		printf("%s is accessible!\n", cmd->cmd[index]);
+	if (cmd_validation(cmd) == 1)
+		printf("\t%s is accessible!\n", cmd->cmd);
 	else
-		printf("%s: command not found: %s\n", MINISHELL_NAME, cmd->cmd[1]);
+		printf("%s: command not found: %s\n", MINISHELL_NAME, cmd->cmd);
 	return (0);
 }
 
-int	cmd_validation(t_cmd *cmd, int index)
+int	cmd_validation(t_cmd *cmd)
 {
 	t_valid	*valid;
 
@@ -30,7 +30,7 @@ int	cmd_validation(t_cmd *cmd, int index)
 		return (0);
 	valid->spaces = 0;
 	valid->path = 0;
-	while (cmd->cmd[index][valid->spaces] == ' ')
+	while (cmd->cmd[valid->spaces] == ' ')
 		valid->spaces++;
 	valid->env = getenv("PATH");
 	valid->splitted_env = ft_split(valid->env, ':');
@@ -38,7 +38,7 @@ int	cmd_validation(t_cmd *cmd, int index)
 	{
 		valid->tmp1 = ft_strjoin(valid->splitted_env[valid->path], "/");
 		valid->tmp2 = ft_strjoin(valid->tmp1, \
-			(cmd->cmd[index]) + valid->spaces);
+			(cmd->cmd) + valid->spaces);
 		free(valid->tmp1);
 		if (access(valid->tmp2, X_OK) == 0)
 		{

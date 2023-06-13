@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:51:31 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/13 16:58:40 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/13 19:50:13 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	(void)envp;
-	int		looping = 1;
-	while (looping)
+	char	*input;
+
+	while (1)
 	{
-		char *input = readline("$ ");
-		// printf("%s", input);
+		input = readline("\033[32mMinishelly $\033[0m ");
 		lexer(input, envp);
 	}
 	return (0);

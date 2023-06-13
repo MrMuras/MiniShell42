@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:46:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/13 18:56:45 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/13 20:10:51 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	lexer(char *input, char **envp)
 		exit(0);
 	ret = ft_split(input, ' ');
 	i = 0;
-	while (ret[i])
-		identify(ret, cmd, index);
+	identify(ret, cmd);
 	return (1);
 }
 
@@ -55,60 +54,71 @@ int	expand(char *str, t_cmd *cmd)
 	{
 		while (str[i] >= '0' && str[i] <= '9')
 			i++;
-		if (str[i] >= 'A' && str[i] <= 'Z')
+		if (str[i] >= 'a' && str[i] <= 'z')
 			return (0);
-		else if (str[i] >= 'a' && str[i] <= 'z')
-			return (0);
-		str = &str[i];
 		while (cmd->myenvp[j])
 		{
 			if ((ft_strncmp(cmd->myenvp[j], str, 100)) == 0)
 			{
-				printf("FOUND EXPANSION");
-				cmd->expansion = cmd->myenvp;
+				printf("\tFOUND EXPANSION\n");
+				cmd->expansion = cmd->myenvp[j];
 				break ;
 			}
 			j++;
 		}
+		i++;
 	}
 	return (1);
 }
 
-int	identify(char **input, t_cmd *cmd, int index)
+int	identify(char **input, t_cmd *cmd)
 {
 	int	i;
+	int	j;
+	int	is_rec;
 
+	j = 0;
 	i = 0;
+	is_rec = 0;
 	while (input[i])
 	{
 		if (i == 0)
 		{
-			cmd->cmd[index] = input[i];
-			printf("%s is the main command\n", cmd->cmd[index]);
+			cmd->cmd = input[i];
+			parsing(cmd);
+			printf("\t%s is the main command\n", cmd->cmd);
 		}
 		else if (i == 1 && input[i][0] == '-')
 		{
 			cmd->flag = input[i];
-			printf("%s is a flag\n", cmd->flag);
+			printf("\t%s is a flag\n", cmd->flag);
 		}
 		else if (input[i][0] == '$')
-			expand(input[i], cmd);
+		{
+			if (expand(input[i], cmd) == 1)
+				printf("%s", cmd->expansion);
+		}
 		else if (input[i][0] == '|')
 		{
-			printf("PIPE HAS BEEN HIT!\n");
-			if (input[i + 2])
-				identify(&input[i + 2], cmd, index++);
+			printf("\tPIPE HAS BEEN HIT!\n");
+			if (input[i + 1][j])
+			{
+				//WHAT ABOUT OUTPUT?
+				printf("\tCATALISYS OF NEW PROGRAM\n");
+				is_rec = 1;
+				break ;
+			}
 		}
 		else
 		{
 			cmd->args = malloc(sizeof(char *) * 2);
-			cmd->args[0] = strdup(input[i]);
-			cmd->args[1] = NULL;
-			printf("%s is an argument\n", cmd->args[0]);
+			cmd->args = strdup(input[i]);
+			printf("\t%s is an argument\n", cmd->args);
 		}
 		i++;
 	}
-	parsing(cmd, index);
+	if (is_rec == 1)
+		identify(input + i + 1, cmd);
 	return (0);
 }
 
