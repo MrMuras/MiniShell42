@@ -6,7 +6,7 @@
 #    By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 15:24:15 by snocita           #+#    #+#              #
-#    Updated: 2023/06/12 17:14:56 by snocita          ###   ########.fr        #
+#    Updated: 2023/06/13 16:36:52 by snocita          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RM		= rm -rf
 
 HEADER	= headers/minishell.h
 
-SRCS	= src/main.c src/lexer.c
+SRCS	= src/main.c src/lexer.c src/parsing.c
 SRC_DIR = src
 OBJS	= $(SRCS:.c=.o)
 OBJ_DIR = obj
@@ -36,7 +36,7 @@ all:	$(NAME)
 $(NAME):	$(OBJ_DIR) $(OBJS) $(LIBFT) $(GNL)
 			cp $(LIBFT) .
 			cp $(GNL) . 
-			@$(CC) $(CFLAGS) $(OBJS) libft.a get_next_line.a -o $(NAME) -lreadline
+			@$(CC) $(CFLAGS) $(OBJS) libft.a get_next_line.a -g -o $(NAME) -lreadline
 			mv src/*.o ./obj
 
 $(OBJ_DIR):
