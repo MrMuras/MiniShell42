@@ -6,16 +6,23 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:13:23 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/14 17:35:00 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/14 18:22:22 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int	parsing(t_cmd *cmd)
+int	parsing(t_cmd *cmd, enum e_builtins builtin)
 {
 	if (cmd_validation(cmd) == 1)
+	{
 		printf("\t%s is accessible!\n", cmd->cmd);
+		while (builtin)
+		{
+			printf("%s\n", builtin);
+			builtin++;
+		}
+	}
 	else
 		printf("%s: command not found: %s\n", MINISHELL_NAME, cmd->cmd);
 	return (0);

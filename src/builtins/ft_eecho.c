@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 17:06:25 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/14 17:49:09 by snocita          ###   ########.fr       */
+/*   Created: 2023/06/14 17:51:48 by snocita           #+#    #+#             */
+/*   Updated: 2023/06/14 18:16:49 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../headers/minishell.h"
 
-void	execution(char	*input, t_cmd	*cmd)
+int	ft_echo(t_cmd	*cmd)
 {
-	(void)input;
-	(void)cmd;
+	if (cmd->args)
+	{
+		if (!(cmd->flag))
+			printf("\n");
+	}
+	return (0);
 }

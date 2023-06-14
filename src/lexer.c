@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:46:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/14 17:34:09 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/14 18:18:58 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	identify(char **input, t_cmd *cmd)
 		if (i == 0)
 		{
 			cmd->cmd = input[i];
-			parsing(cmd);
+			parsing(cmd, e_builtins);
 			//printf("\t%s is the main command\n", cmd->cmd);
 		}
 		else if (i == 1 && input[i][0] == '-')

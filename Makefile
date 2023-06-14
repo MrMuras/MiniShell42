@@ -6,7 +6,7 @@
 #    By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 15:24:15 by snocita           #+#    #+#              #
-#    Updated: 2023/06/14 17:18:51 by snocita          ###   ########.fr        #
+#    Updated: 2023/06/14 18:17:14 by snocita          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RM		= rm -rf
 
 HEADER	= headers/minishell.h
 
-SRCS	= src/main.c src/lexer.c src/parsing.c src/execution.c
+SRCS	= src/main.c src/lexer.c src/parsing.c src/execution.c src/builtins/ft_eecho.c
 SRC_DIR = src
 OBJS	= $(SRCS:.c=.o)
 OBJ_DIR = obj
