@@ -6,32 +6,19 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:46:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/13 20:10:51 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/14 17:34:09 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-// int	prelexer(int ac, char **av)
-// {
-// 	if (ac == 2)
-// 		lexer(av[1]);
-// 	else
-// 		identify(av + 1);
-// 	return (0);
-// }
-
-int	lexer(char *input, char **envp)
+int	lexer(char *input, char **envp, t_cmd	*cmd)
 {
 	char	**ret;
-	t_cmd	*cmd;
 	int		i;
 	int		index;
 
 	index = 0;
-	cmd = (t_cmd *)malloc(sizeof(t_cmd *));
-	if (!cmd)
-		return (0);
 	cmd->myenvp = ft_double_strdup(envp);
 	if (strlen(input) == 0)
 		return (0);
@@ -47,9 +34,11 @@ int	expand(char *str, t_cmd *cmd)
 {
 	int	i;
 	int	j;
+	int	k;
 
 	i = 1;
 	j = 0;
+	k = 0;
 	while (str[i])
 	{
 		while (str[i] >= '0' && str[i] <= '9')
@@ -58,12 +47,14 @@ int	expand(char *str, t_cmd *cmd)
 			return (0);
 		while (cmd->myenvp[j])
 		{
-			if ((ft_strncmp(cmd->myenvp[j], str, 100)) == 0)
+			if ((ft_strncmp(cmd->myenvp[j], str + 1, ft_strlen(str + 1))) == 0)
 			{
-				printf("\tFOUND EXPANSION\n");
-				cmd->expansion = cmd->myenvp[j];
+				while (cmd->myenvp[j][k] != '=')
+					k++;
+				cmd->expansion = &cmd->myenvp[j][k + 1];
 				break ;
 			}
+			cmd->expansion = " \n";
 			j++;
 		}
 		i++;
@@ -71,7 +62,7 @@ int	expand(char *str, t_cmd *cmd)
 	return (1);
 }
 
-int	identify(char **input, t_cmd *cmd)
+void	identify(char **input, t_cmd *cmd)
 {
 	int	i;
 	int	j;
@@ -86,25 +77,26 @@ int	identify(char **input, t_cmd *cmd)
 		{
 			cmd->cmd = input[i];
 			parsing(cmd);
-			printf("\t%s is the main command\n", cmd->cmd);
+			//printf("\t%s is the main command\n", cmd->cmd);
 		}
 		else if (i == 1 && input[i][0] == '-')
 		{
 			cmd->flag = input[i];
-			printf("\t%s is a flag\n", cmd->flag);
+			//printf("\t%s is a flag\n", cmd->flag);
 		}
 		else if (input[i][0] == '$')
 		{
+			//printf("DOLLAR SIGN FOUND\n");
 			if (expand(input[i], cmd) == 1)
-				printf("%s", cmd->expansion);
+				printf("The expansion found is equal to: %s\n", cmd->expansion);
 		}
 		else if (input[i][0] == '|')
 		{
-			printf("\tPIPE HAS BEEN HIT!\n");
+			//printf("\tPIPE HAS BEEN HIT!\n");
 			if (input[i + 1][j])
 			{
 				//WHAT ABOUT OUTPUT?
-				printf("\tCATALISYS OF NEW PROGRAM\n");
+				//printf("\tCATALISYS OF NEW PROGRAM\n");
 				is_rec = 1;
 				break ;
 			}
@@ -113,13 +105,12 @@ int	identify(char **input, t_cmd *cmd)
 		{
 			cmd->args = malloc(sizeof(char *) * 2);
 			cmd->args = strdup(input[i]);
-			printf("\t%s is an argument\n", cmd->args);
+			//printf("\t%s is an argument\n", cmd->args);
 		}
 		i++;
 	}
 	if (is_rec == 1)
 		identify(input + i + 1, cmd);
-	return (0);
 }
 
 //CMD VALIDATION IS WAS IMPLEMENTED HERE, BUT WILL ULTIMATELY BE INSIDE THE PARSING, NOT LEXING!!!!!!!!

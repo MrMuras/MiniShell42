@@ -6,32 +6,39 @@
 /*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:51:31 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/14 17:35:46 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:41:30 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-//create an program main that shows a prompt and waits for a command and just spits it out.
+t_cmd	*init_structs(void)
+{
+	t_cmd	*cmd;
 
-// int	read_cmd(void)
-// {
-// 	write(0, "hello", 4);
-// }
+	cmd = (t_cmd *)malloc(sizeof(t_cmd *));
+	if (!cmd)
+		return (0);
+	return (cmd);
+}
 
 int	main(int ac, char **av, char **envp)
 {
+	char	*input;
+	t_cmd	*cmd;
+
 	(void)ac;
 	(void)av;
 	(void)envp;
-	char	*input;
 
+	cmd = init_structs();
 	using_history();
 	while (1)
 	{
-		input = readline("\033[32mMinishelly $\033[0m ");
+		input = readline("\033[32mMinishelly$\033[0m ");
 		add_history(input);
-		lexer(input, envp);
+		if (lexer(input, envp, cmd) == 1)
+			execution(input, cmd);
 	}
 	return (0);
 }
