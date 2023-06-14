@@ -6,18 +6,11 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:51:31 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/14 17:33:06 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/14 17:36:37 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
-
-//create an program main that shows a prompt and waits for a command and just spits it out.
-
-// int	read_cmd(void)
-// {
-// 	write(0, "hello", 4);
-// }
 
 t_cmd	*init_structs(void)
 {
