@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/13 19:09:05 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/14 17:28:18 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,11 @@ typedef struct s_valid
 	char	*tmp2;
 }	t_valid;
 
-int	lexer(char *input, char **envp);
-int	identify(char **input, t_cmd *cmd);
-int	parsing(t_cmd *cmd);
-int	cmd_validation(t_cmd *cmd);
+int		lexer(char *input, char **envp, t_cmd	*cmd);
+void	identify(char **input, t_cmd *cmd);
+int		parsing(t_cmd *cmd);
+int		cmd_validation(t_cmd *cmd);
+t_cmd	*init_structs(void);
+void	execution(char	*input, t_cmd	*cmd);
 
 #endif
