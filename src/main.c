@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:51:31 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/15 17:35:28 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/15 23:02:22 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@ t_cmd	*init_structs(void)
 	t_cmd	*cmd;
 
 	cmd = (t_cmd *)malloc(sizeof(t_cmd *));
-	cmd->cmd = NULL;
-	cmd->args = NULL;
-	cmd->expansion = NULL;
-	cmd->is_builtin = 0;
 	if (!cmd)
 		return (0);
 	return (cmd);
@@ -28,7 +24,6 @@ t_cmd	*init_structs(void)
 
 int	main(int ac, char **av, char **envp)
 {
-//BRANCHNAME->builtins
 	char	*input;
 	t_cmd	*cmd;
 
@@ -36,14 +31,17 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	(void)envp;
 
-	using_history();
 	cmd = init_structs();
+	using_history();
 	while (1)
 	{
 		input = readline("Minishelly$ ");
-		add_history(input);
+		if (strlen(input) > 0)
+			add_history(input);
 		if (lexer(input, envp, cmd) == 1)
 			execution(input, cmd);
+		free(input);
 	}
+	free(cmd);
 	return (0);
 }

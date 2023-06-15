@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:46:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/15 15:29:09 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/15 22:56:23 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,21 @@ int	lexer(char *input, char **envp, t_cmd	*cmd)
 	char	**ret;
 	int		i;
 	int		index;
-
+	(void)envp;
 	index = 0;
-	cmd->myenvp = ft_double_strdup(envp);
+	//cmd->myenvp = ft_double_strdup(envp);
 	if (strlen(input) == 0)
 		return (0);
 	if (strncmp(input, "exit", 4) == 0)
+	{
+		free(cmd);
+		free(input);
 		exit(0);
+	}
 	ret = ft_split(input, ' ');
 	i = 0;
 	identify(ret, cmd);
+	free(ret);
 	return (1);
 }
 

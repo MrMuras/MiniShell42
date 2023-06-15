@@ -3,86 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 15:31:37 by snocita           #+#    #+#             */
-/*   Updated: 2023/01/12 11:11:45 by snocita          ###   ########.fr       */
+/*   Updated: 2023/01/31 18:33:31 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	
-*/
-
-static void	ft_allocate(char **tab, char const *s, char sep)
+static int	number_words(const char *array, char c)
 {
-	char		**tab_p;
-	char const	*tmp;
+	int	i;
+	int	counter;
 
-	tmp = s;
-	tab_p = tab;
-	while (*tmp)
+	i = 0;
+	counter = 0;
+	while (array[i])
 	{
-		while (*s == sep)
-			++s;
-		tmp = s;
-		while (*tmp && *tmp != sep)
-			++tmp;
-		if (*tmp == sep || tmp > s)
+		if (array[i] != c)
 		{
-			*tab_p = ft_substr(s, 0, tmp - s);
-			s = tmp;
-			++tab_p;
+			while (array[i] && array[i] != c)
+				i++;
+			counter++;
 		}
+		else
+			i++;
 	}
-	*tab_p = NULL;
+	return (counter);
 }
 
-static int	ft_count_words(char const *s, char sep)
+static int	size_of_word(char const *s, char c, int i)
 {
-	int	word_count;
+	int	size;
 
-	word_count = 0;
-	while (*s)
+	size = 0;
+	while (s[i] != c && s[i])
 	{
-		while (*s == sep)
-			++s;
-		if (*s)
-			++word_count;
-		while (*s && *s != sep)
-			++s;
+		size++;
+		i++;
 	}
-	return (word_count);
+	return (size);
+}
+
+static void	my_free(char **str, int j)
+{
+	while (j-- > 0)
+		free(str[j]);
+	free (str);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**new;
+	char	**array;
 	int		size;
+	int		i;
+	int		j;
 
-	if (!s)
+	i = 0;
+	j = -1;
+	array = (char **)malloc(sizeof(char *) * (number_words(s, c) + 1));
+	if (!array)
 		return (NULL);
-	size = ft_count_words(s, c);
-	new = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!new)
-		return (NULL);
-	ft_allocate(new, s, c);
-	return (new);
+	while (++j < number_words(s, c))
+	{
+		while (s[i] == c)
+			i++;
+		size = size_of_word(s, c, i);
+		array[j] = ft_substr(s, i, size);
+		if (array[j] == NULL)
+		{
+			my_free(array, j);
+			return (NULL);
+		}
+		i += size;
+	}
+	array[j] = 0;
+	return (array);
 }
-
-// int	main(void)
-// {
-// 	char	**tabstr;
-// 	int		i;
-
-// 	i = 0;
-// 	tabstr = ft_split(NULL, '_');
-// 	while (tabstr[i] != NULL)
-// 	{
-// 		printf("%d = %s\n", i, tabstr[i]);
-// 		i++;
-// 	}
-// 	return (0);
-// }

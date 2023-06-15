@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/15 17:26:40 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/15 23:15:20 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ int		ft_cd(t_cmd	*cmd);
 int		ft_pwd(t_cmd	*cmd);
 int		ft_env(t_cmd	*cmd);
 int		ft_export(t_cmd	*cmd);
+void	my_free(char **str);
 
 #endif
