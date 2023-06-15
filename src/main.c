@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:51:31 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/14 17:49:33 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:35:37 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_cmd	*init_structs(void)
 
 int	main(int ac, char **av, char **envp)
 {
+	PRINTF("HJAHAHAHAHHA");
 	char	*input;
 	t_cmd	*cmd;
 

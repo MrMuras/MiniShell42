@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/14 18:18:13 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:24:29 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,6 @@
 //tcsetattr, tcgetattr, tgetent, 
 //	tgetflag, tgetnum, tgetstr, tgoto, tputs: termios.h
 
-enum e_builtins {
-	nuts,
-	cd,
-	pwd,
-	export,
-	unset,
-	env,
-	ft_exit,
-	builtin_num = 7
-};
-
 typedef struct s_cmd
 {
 	char	*cmd;
@@ -79,6 +68,7 @@ typedef struct s_cmd
 	char	*args;
 	char	*expansion;
 	char	**myenvp;
+	int		is_builtin;
 }	t_cmd;
 
 typedef struct s_valid
@@ -93,10 +83,12 @@ typedef struct s_valid
 
 int		lexer(char *input, char **envp, t_cmd	*cmd);
 void	identify(char **input, t_cmd *cmd);
-int		parsing(t_cmd *cmd, enum e_builtins builtin);
+int		parsing(t_cmd *cmd);
 int		cmd_validation(t_cmd *cmd);
 t_cmd	*init_structs(void);
 void	execution(char	*input, t_cmd	*cmd);
 int		ft_echo(t_cmd	*cmd);
+int		is_builtin(t_cmd	*cmd);
+int		ft_cd(t_cmd	*cmd);
 
 #endif

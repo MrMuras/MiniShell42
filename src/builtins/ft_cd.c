@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 17:51:48 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/14 18:16:49 by snocita          ###   ########.fr       */
+/*   Created: 2023/06/15 15:12:18 by snocita           #+#    #+#             */
+/*   Updated: 2023/06/15 15:24:11 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	ft_echo(t_cmd	*cmd)
+//chdir cmd
+int	ft_cd(t_cmd	*cmd)
 {
-	if (cmd->args)
-	{
-		if (!(cmd->flag))
-			printf("\n");
-	}
-	return (0);
+	(void)cmd;
 }

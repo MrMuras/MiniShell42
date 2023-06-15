@@ -6,22 +6,42 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:13:23 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/14 18:22:22 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:24:42 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int	parsing(t_cmd *cmd, enum e_builtins builtin)
+int	is_builtin(t_cmd	*cmd)
+{
+	int	cmd_length;
+
+	cmd_length = ft_strlen(cmd->cmd);
+	if (ft_strncmp(cmd->cmd, "echo", cmd_length) == 0)
+		return (ft_echo(cmd));
+	// if (ft_strncmp(cmd->cmd, "cd", cmd_length) == 0)
+	// 	return (ft_cd(cmd->cmd));
+	// if (ft_strncmp(cmd->cmd, "pwd", cmd_length) == 0)
+	// 	return (ft_pwd(cmd->cmd));
+	// if (ft_strncmp(cmd->cmd, "export", cmd_length) == 0)
+	// 	return (ft_export(cmd->cmd));
+	// if (ft_strncmp(cmd->cmd, "unset", cmd_length) == 0)
+	// 	return (ft_unset(cmd->cmd));
+	// if (ft_strncmp(cmd->cmd, "env", cmd_length) == 0)
+	// 	return (ft_env(cmd->cmd));
+	// if (ft_strncmp(cmd->cmd, "exit", cmd_length) == 0)
+	// 	return (ft_exit(cmd->cmd));
+	else
+		return (0);
+}
+
+int	parsing(t_cmd *cmd)
 {
 	if (cmd_validation(cmd) == 1)
 	{
 		printf("\t%s is accessible!\n", cmd->cmd);
-		while (builtin)
-		{
-			printf("%s\n", builtin);
-			builtin++;
-		}
+		// if (cmd->is_builtin != 1)
+		// 	printf("\tIt's a normal cmd!\n");
 	}
 	else
 		printf("%s: command not found: %s\n", MINISHELL_NAME, cmd->cmd);
