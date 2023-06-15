@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 17:51:48 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/15 17:32:53 by snocita          ###   ########.fr       */
+/*   Created: 2023/06/15 16:58:29 by snocita           #+#    #+#             */
+/*   Updated: 2023/06/15 17:09:24 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	ft_echo(t_cmd	*cmd)
+int	ft_env(t_cmd	*cmd)
 {
-	cmd->is_builtin = 1;
-	if (!cmd->args)
-		printf(" ");
-	else
-	{
-		printf("its fucked up\n");
-		printf("%s", cmd->args);
-	}
-	if (!(cmd->flag))
-		printf("\n");
-	cmd = init_structs();
-	printf("%s\n", cmd->cmd);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (cmd->myenvp[i])
+		printf("%s\n", cmd->myenvp[i++]);
 	return (1);
 }

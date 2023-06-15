@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 17:51:48 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/15 17:32:53 by snocita          ###   ########.fr       */
+/*   Created: 2023/06/15 17:18:05 by snocita           #+#    #+#             */
+/*   Updated: 2023/06/15 17:40:19 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	ft_echo(t_cmd	*cmd)
+int	ft_export(t_cmd	*cmd)
 {
-	cmd->is_builtin = 1;
-	if (!cmd->args)
-		printf(" ");
-	else
-	{
-		printf("its fucked up\n");
-		printf("%s", cmd->args);
-	}
-	if (!(cmd->flag))
-		printf("\n");
-	cmd = init_structs();
-	printf("%s\n", cmd->cmd);
+	char	**export_vars;
+
+	if (!(cmd->args))
+		return (0);
+	export_vars = ft_split(cmd->args, '=');
+	printf("%s\n", export_vars[1]);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/15 15:24:29 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/15 17:26:40 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,8 @@ void	execution(char	*input, t_cmd	*cmd);
 int		ft_echo(t_cmd	*cmd);
 int		is_builtin(t_cmd	*cmd);
 int		ft_cd(t_cmd	*cmd);
+int		ft_pwd(t_cmd	*cmd);
+int		ft_env(t_cmd	*cmd);
+int		ft_export(t_cmd	*cmd);
 
 #endif
