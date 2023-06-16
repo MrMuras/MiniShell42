@@ -6,7 +6,7 @@
 /*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:46:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/15 22:56:23 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/16 17:27:12 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@ int	lexer(char *input, char **envp, t_cmd	*cmd)
 	if (strlen(input) == 0)
 		return (0);
 	if (strncmp(input, "exit", 4) == 0)
-	{
-		free(cmd);
-		free(input);
 		exit(0);
-	}
 	ret = ft_split(input, ' ');
 	i = 0;
 	identify(ret, cmd);
@@ -108,7 +104,6 @@ void	identify(char **input, t_cmd *cmd)
 		}
 		else
 		{
-			cmd->args = malloc(sizeof(char *) * 2);
 			cmd->args = strdup(input[i]);
 			printf("\t%s is an argument\n", cmd->args);
 		}

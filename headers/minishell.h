@@ -6,7 +6,7 @@
 /*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/15 23:15:20 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:02:26 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		lexer(char *input, char **envp, t_cmd	*cmd);
 void	identify(char **input, t_cmd *cmd);
 int		parsing(t_cmd *cmd);
 int		cmd_validation(t_cmd *cmd);
-t_cmd	*init_structs(void);
+t_cmd	*malloc_struct(void);
 void	execution(char	*input, t_cmd	*cmd);
 int		ft_echo(t_cmd	*cmd);
 int		is_builtin(t_cmd	*cmd);
@@ -94,5 +94,6 @@ int		ft_pwd(t_cmd	*cmd);
 int		ft_env(t_cmd	*cmd);
 int		ft_export(t_cmd	*cmd);
 void	my_free(char **str);
+void	init_struct(t_cmd	*cmd);
 
 #endif

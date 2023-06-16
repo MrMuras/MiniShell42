@@ -6,7 +6,7 @@
 /*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:13:23 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/16 16:56:14 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/16 17:11:20 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ int	cmd_validation(t_cmd *cmd)
 		free(valid->tmp2);
 		valid->path++;
 	}
-	free
 	return (0);
 }
