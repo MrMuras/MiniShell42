@@ -6,7 +6,7 @@
 /*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:18:05 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/16 19:09:58 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:01:26 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	update_envp(t_cmd	*cmd, char *export_var)
 	temp_myenvp[i] = export_var;
 	cmd->myenvp = temp_myenvp;
 	printf("%s\n", cmd->myenvp[i]);
-	// free(temp_myenvp);
+	free(temp_myenvp);
 }
 
 int	ft_export(t_cmd	*cmd)
