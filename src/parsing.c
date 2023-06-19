@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:13:23 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/16 17:11:20 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:53:26 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	cmd_validation(t_cmd *cmd)
 		free(valid->tmp1);
 		if (access(valid->tmp2, X_OK) == 0)
 		{
+			cmd->path = valid->tmp2;
 			free(valid->tmp2);
 			return (1);
 		}
