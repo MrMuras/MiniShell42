@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:13:23 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/19 13:53:26 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/19 20:40:07 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	is_builtin(t_cmd	*cmd)
 	// 	return (ft_unset(cmd));
 	if (ft_strncmp(cmd->cmd, "env", cmd_length) == 0)
 		return (ft_env(cmd));
-	// if (ft_strncmp(cmd->cmd, "exit", cmd_length) == 0)
-	// 	return (ft_exit(cmd));
+	if (ft_strncmp(cmd->cmd, "exit", cmd_length) == 0)
+		return (ft_exit(cmd));
 	else
 		return (0);
 }

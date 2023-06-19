@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/19 18:16:18 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/19 21:09:34 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct s_cmd
 	char	**myenvp;
 	int		is_builtin;
 	char	*path;
+	int		exit;
+	char	*input;
 }	t_cmd;
 
 typedef struct s_valid
@@ -82,7 +84,7 @@ typedef struct s_valid
 	char	*tmp2;
 }	t_valid;
 
-t_cmd	*lexer(char *input, char **envp, t_cmd	*cmd);
+t_cmd	*lexer(char *input, t_cmd	*cmd);
 int		expand(char *str, t_cmd *cmd);
 void	identify(char **input, t_cmd *cmd);
 int		parsing(t_cmd *cmd);
@@ -98,5 +100,7 @@ int		ft_export(t_cmd	*cmd);
 void	free_double_arr(char **str);
 void	init_struct(t_cmd	*cmd);
 void	free_all(t_cmd	*cmd);
+int		ft_exit(t_cmd *cmd);
+
 
 #endif
