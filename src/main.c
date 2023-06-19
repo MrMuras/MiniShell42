@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:51:31 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/19 13:10:11 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:56:18 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ int	main(int ac, char **av, char **envp)
 		input = readline("Minishelly$ ");
 		if (strlen(input) > 0)
 			add_history(input);
-		if (lexer(input, envp, cmd) == 1)
-			execution(input, cmd);
+		cmd = lexer(input, envp, cmd);
+//		printf("\tPATH? %s\n", cmd->path);
+		execution(input, cmd);
 		free(input);
 	}
 	free(cmd->args);

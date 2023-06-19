@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:46:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/19 13:23:12 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/19 13:52:19 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	makefile(void)
 	execve("/usr/bin/make", (char *[]){"make", "re", NULL}, (char *[]){NULL});
 }
 
-int	lexer(char *input, char **envp, t_cmd	*cmd)
+t_cmd	*lexer(char *input, char **envp, t_cmd	*cmd)
 {
 	char	**ret;
 	int		i;
@@ -36,7 +36,7 @@ int	lexer(char *input, char **envp, t_cmd	*cmd)
 	i = 0;
 	identify(ret, cmd);
 	free(ret);
-	return (1);
+	return (cmd);
 }
 
 int	expand(char *str, t_cmd *cmd)
@@ -85,7 +85,6 @@ void	identify(char **input, t_cmd *cmd)
 		if (i == 0)
 		{
 			cmd->cmd = input[i];
-			parsing(cmd);
 			printf("\t%s is the main command\n", cmd->cmd);
 		}
 		else if (i == 1 && input[i][0] == '-')
