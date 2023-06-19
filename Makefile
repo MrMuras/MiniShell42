@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 15:24:15 by snocita           #+#    #+#              #
-#    Updated: 2023/06/15 23:15:58 by amurawsk         ###   ########.fr        #
+#    Updated: 2023/06/19 12:44:28 by snocita          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ $(NAME):	$(OBJ_DIR) $(OBJS) $(LIBFT) $(GNL)
 			cp $(GNL) . 
 			@$(CC) $(CFLAGS) $(OBJS) libft.a get_next_line.a -g -o $(NAME) -lreadline
 			mv src/*.o ./obj
+			mv src/builtins/*.o ./obj
 
 $(OBJ_DIR):
 			mkdir $(OBJ_DIR)
@@ -59,7 +60,7 @@ clean:
 
 fclean:	clean
 		@$(RM) $(NAME)
-		$(RM) libft.a
+		$(RM) libft.a get_next_line.a
 		make -C $(LIBFT_PATH) fclean
 
 re:		fclean all

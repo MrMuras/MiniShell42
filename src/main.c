@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:51:31 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/16 18:49:03 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:10:11 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_cmd	*malloc_struct(void)
 	return (cmd);
 }
 
-int	main(int ac,char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
 	char	*input;
 	t_cmd	*cmd;

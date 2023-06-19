@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:51:48 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/16 18:01:52 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/19 12:48:08 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	ft_echo(t_cmd	*cmd)
 {
-	//cmd->is_builtin = 1;
 	if (cmd->args == NULL)
 		write(1, "", 1);
 	else

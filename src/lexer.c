@@ -3,20 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:46:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/16 17:27:12 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:23:12 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
+
+void	makefile(void)
+{
+	execve("/usr/bin/make", (char *[]){"make", "re", NULL}, (char *[]){NULL});
+}
 
 int	lexer(char *input, char **envp, t_cmd	*cmd)
 {
 	char	**ret;
 	int		i;
 	int		index;
+
 	(void)envp;
 	index = 0;
 	//cmd->myenvp = ft_double_strdup(envp);
@@ -24,6 +30,8 @@ int	lexer(char *input, char **envp, t_cmd	*cmd)
 		return (0);
 	if (strncmp(input, "exit", 4) == 0)
 		exit(0);
+	if (strncmp(input, "make", 4) == 0)
+		makefile();
 	ret = ft_split(input, ' ');
 	i = 0;
 	identify(ret, cmd);
