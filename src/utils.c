@@ -6,17 +6,23 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 23:09:14 by amurawsk          #+#    #+#             */
-/*   Updated: 2023/06/19 12:51:51 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/19 17:22:56 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-void	my_free(char **str)
+void	free_double_arr(char **str)
 {
-	while (str++)
-		free(*str);
-	free (str);
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
 
 void	init_struct(t_cmd	*cmd)

@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:51:31 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/19 13:56:18 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/19 18:18:45 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ t_cmd	*malloc_struct(void)
 	if (!cmd)
 		return (0);
 	return (cmd);
+}
+
+void	free_all(t_cmd	*cmd)
+{
+	free_double_arr(cmd->myenvp);
+	free(cmd);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -39,11 +45,10 @@ int	main(int ac, char **av, char **envp)
 		if (strlen(input) > 0)
 			add_history(input);
 		cmd = lexer(input, envp, cmd);
-//		printf("\tPATH? %s\n", cmd->path);
-		execution(input, cmd);
+		if (cmd->is_builtin == 0)
+			execution(cmd);
 		free(input);
 	}
-	free(cmd->args);
-	free(cmd);
+	free_all(cmd);
 	return (0);
 }

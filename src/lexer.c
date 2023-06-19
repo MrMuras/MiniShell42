@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:46:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/19 13:52:19 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/19 17:42:00 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,14 @@ int	expand(char *str, t_cmd *cmd)
 		{
 			if ((ft_strncmp(cmd->myenvp[j], str + 1, ft_strlen(str + 1))) == 0)
 			{
-				while (cmd->myenvp[j][k] != '=')
-					k++;
-				cmd->expansion = &cmd->myenvp[j][k + 1];
-				break ;
+				if (cmd->myenvp[j][ft_strlen(str + 1)] == '=')
+				{
+					while (cmd->myenvp[j][k] != '=')
+						k++;
+					cmd->expansion = &cmd->myenvp[j][k + 1];
+					write(1, &cmd->expansion, ft_strlen(cmd->expansion));
+					break ;
+				}
 			}
 			cmd->expansion = " \n";
 			j++;
@@ -85,18 +89,17 @@ void	identify(char **input, t_cmd *cmd)
 		if (i == 0)
 		{
 			cmd->cmd = input[i];
-			printf("\t%s is the main command\n", cmd->cmd);
+			// printf("\t%s is the main command\n", cmd->cmd);
 		}
 		else if (i == 1 && input[i][0] == '-')
 		{
 			cmd->flag = input[i];
-			printf("\t%s is a flag\n", cmd->flag);
+			// printf("\t%s is a flag\n", cmd->flag);
 		}
 		else if (input[i][0] == '$')
 		{
-			printf("DOLLAR SIGN FOUND\n");
-			if (expand(input[i], cmd) == 1)
-				printf("The expansion found is equal to: %s\n", cmd->expansion);
+ 
+			expand(input[i], cmd);
 		}
 		else if (input[i][0] == '|')
 		{
@@ -117,7 +120,10 @@ void	identify(char **input, t_cmd *cmd)
 		i++;
 	}
 	if (is_builtin(cmd) == 1)
+	{
+		cmd->is_builtin = 1;
 		printf("\tand is a builtin!\n");
+	}
 	if (is_rec == 1)
 		identify(input + i + 1, cmd);
 }
