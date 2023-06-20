@@ -1,0 +1,18 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+spawn ./minishell
+
+expect "minishell\$ " {
+    send "ls\r"
+}
+expect "minishell\$ " {
+    send "pwd\r"
+}
+expect "minishell\$ " {
+    send "ls | wc -l\r"
+}
+expect "minishell\$ " {
+    send "exit\r"
+}
+expect eof

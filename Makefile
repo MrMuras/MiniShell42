@@ -6,7 +6,7 @@
 #    By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 15:24:15 by snocita           #+#    #+#              #
-#    Updated: 2023/06/19 20:44:32 by amurawsk         ###   ########.fr        #
+#    Updated: 2023/06/20 14:05:45 by amurawsk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,5 +63,6 @@ fclean:	clean
 		@$(RM) $(NAME)
 		$(RM) libft.a get_next_line.a
 		make -C $(LIBFT_PATH) fclean
+
 
 re:		fclean all

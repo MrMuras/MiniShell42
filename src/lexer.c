@@ -6,7 +6,7 @@
 /*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:46:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/19 21:17:07 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/19 21:36:29 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,44 +29,8 @@ t_cmd	*lexer(char *input, t_cmd	*cmd)
 	ret = ft_split(input, ' ');
 	i = 0;
 	identify(ret, cmd);
-	free_double_arr(ret);
+	//free_double_arr(ret);
 	return (cmd);
-}
-
-int	expand(char *str, t_cmd *cmd)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 1;
-	j = 0;
-	k = 0;
-	while (str[i])
-	{
-		while (str[i] >= '0' && str[i] <= '9')
-			i++;
-		if (str[i] >= 'a' && str[i] <= 'z')
-			return (0);
-		while (cmd->myenvp[j])
-		{
-			if ((ft_strncmp(cmd->myenvp[j], str + 1, ft_strlen(str + 1))) == 0)
-			{
-				if (cmd->myenvp[j][ft_strlen(str + 1)] == '=')
-				{
-					while (cmd->myenvp[j][k] != '=')
-						k++;
-					cmd->expansion = &cmd->myenvp[j][k + 1];
-					write(1, &cmd->expansion, ft_strlen(cmd->expansion));
-					break ;
-				}
-			}
-			cmd->expansion = " \n";
-			j++;
-		}
-		i++;
-	}
-	return (1);
 }
 
 void	identify(char **input, t_cmd *cmd)
@@ -120,6 +84,41 @@ void	identify(char **input, t_cmd *cmd)
 		identify(input + i + 1, cmd);
 }
 
+int	expand(char *str, t_cmd *cmd)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 1;
+	j = 0;
+	k = 0;
+	while (str[i])
+	{
+		while (str[i] >= '0' && str[i] <= '9')
+			i++;
+		if (str[i] >= 'a' && str[i] <= 'z')
+			return (0);
+		while (cmd->myenvp[j])
+		{
+			if ((ft_strncmp(cmd->myenvp[j], str + 1, ft_strlen(str + 1))) == 0)
+			{
+				if (cmd->myenvp[j][ft_strlen(str + 1)] == '=')
+				{
+					while (cmd->myenvp[j][k] != '=')
+						k++;
+					cmd->expansion = &cmd->myenvp[j][k + 1];
+					write(1, &cmd->expansion, ft_strlen(cmd->expansion));
+					break ;
+				}
+			}
+			cmd->expansion = " \n";
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
 //CMD VALIDATION IS WAS IMPLEMENTED HERE, BUT WILL ULTIMATELY BE INSIDE THE PARSING, NOT LEXING!!!!!!!!
 // int	identify(char **input)
 // {
