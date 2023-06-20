@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 17:06:25 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/19 19:18:45 by amurawsk         ###   ########.fr       */
+/*   Created: 2023/06/20 17:23:32 by snocita           #+#    #+#             */
+/*   Updated: 2023/06/20 17:23:35 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
