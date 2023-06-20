@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 17:08:48 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/13 17:48:52 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/20 19:33:00 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ char	**ft_double_strdup(char **envp)
 	j = 0;
 	while (envp[i])
 		i++;
+	i += 1000;
 	myenvp = (char **)malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	while (envp[i])
 	{
-		myenvp[i] = malloc(sizeof(char) * (strlen(envp[i]) + 1));
+		if (envp[i] == NULL)
+			continue ;
+		myenvp[i] = malloc(sizeof(char) * (ft_strlen(envp[i]) + 1000));
 		strcpy(myenvp[i], envp[i]);
 		i++;
 	}

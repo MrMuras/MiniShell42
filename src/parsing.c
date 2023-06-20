@@ -3,33 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 16:13:23 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/19 20:40:07 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:34:24 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-int	is_builtin(t_cmd	*cmd)
+int	is_builtin(t_cmd	*cmd, char	**envp)
 {
-	int	cmd_length;
-
-	cmd_length = ft_strlen(cmd->cmd);
-	if (ft_strncmp(cmd->cmd, "echo", cmd_length) == 0)
+	if ((ft_strncmp(cmd->cmd, "echo", ft_strlen("echo")) == 0))
 		return (ft_echo(cmd));
-	if (ft_strncmp(cmd->cmd, "cd", cmd_length) == 0)
+	if (ft_strncmp(cmd->cmd, "cd", ft_strlen("cd")) == 0)
 		return (ft_cd(cmd));
-	if (ft_strncmp(cmd->cmd, "pwd", cmd_length) == 0)
+	if (ft_strncmp(cmd->cmd, "pwd", ft_strlen("pwd")) == 0)
 		return (ft_pwd(cmd));
-	if (ft_strncmp(cmd->cmd, "export", cmd_length) == 0)
-		return (ft_export(cmd));
-	// if (ft_strncmp(cmd->cmd, "unset", cmd_length) == 0)
+	if (ft_strncmp(cmd->cmd, "export", ft_strlen("export")) == 0)
+		return (ft_export(cmd, envp));
+	// if (ft_strncmp(cmd->cmd, "unset", ft_strlen()) == 0)
 	// 	return (ft_unset(cmd));
-	if (ft_strncmp(cmd->cmd, "env", cmd_length) == 0)
-		return (ft_env(cmd));
-	if (ft_strncmp(cmd->cmd, "exit", cmd_length) == 0)
+	if (ft_strncmp(cmd->cmd, "env", ft_strlen("env")) == 0)
+		return (ft_env(envp));
+	if (ft_strncmp(cmd->cmd, "exit", ft_strlen("exit")) == 0)
 		return (ft_exit(cmd));
 	else
 		return (0);

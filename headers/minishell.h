@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/19 21:09:34 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:03:19 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,14 @@
 typedef struct s_cmd
 {
 	char	*cmd;
-	int		*cmd_index;
 	char	*flag;
 	char	*args;
 	char	*expansion;
-	char	**myenvp;
 	int		is_builtin;
 	char	*path;
 	int		exit;
 	char	*input;
+	char	**spl_input;
 }	t_cmd;
 
 typedef struct s_valid
@@ -84,23 +83,22 @@ typedef struct s_valid
 	char	*tmp2;
 }	t_valid;
 
-t_cmd	*lexer(char *input, t_cmd	*cmd);
-int		expand(char *str, t_cmd *cmd);
-void	identify(char **input, t_cmd *cmd);
+t_cmd	*lexer(char *input, t_cmd	*cmd, char **envp);
+void	identify(char **input, t_cmd *cmd, char **envp);
 int		parsing(t_cmd *cmd);
+int		expand(char *str, t_cmd *cmd, char **envp);
 int		cmd_validation(t_cmd *cmd);
 t_cmd	*malloc_struct(void);
 void	execution(t_cmd	*cmd);
 int		ft_echo(t_cmd	*cmd);
-int		is_builtin(t_cmd	*cmd);
+int		is_builtin(t_cmd	*cmd, char	**envp);
 int		ft_cd(t_cmd	*cmd);
 int		ft_pwd(t_cmd	*cmd);
-int		ft_env(t_cmd	*cmd);
-int		ft_export(t_cmd	*cmd);
+int		ft_env(char **envp);
+int		ft_export(t_cmd	*cmd, char	**envp);
 void	free_double_arr(char **str);
 void	init_struct(t_cmd	*cmd);
 void	free_all(t_cmd	*cmd);
 int		ft_exit(t_cmd *cmd);
-
 
 #endif

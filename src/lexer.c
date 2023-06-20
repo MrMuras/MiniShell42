@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:46:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/19 21:17:07 by amurawsk         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:49:42 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,59 +17,21 @@ void	makefile(void)
 	execve("/usr/bin/make", (char *[]){"make", "re", NULL}, (char *[]){NULL});
 }
 
-t_cmd	*lexer(char *input, t_cmd	*cmd)
+t_cmd	*lexer(char *input, t_cmd	*cmd, char **envp)
 {
-	char	**ret;
 	int		i;
 
 	if (strlen(input) == 0)
 		return (0);
 	if (strncmp(input, "make", 4) == 0)
 		makefile();
-	ret = ft_split(input, ' ');
+	cmd->spl_input = ft_split(input, ' ');
 	i = 0;
-	identify(ret, cmd);
-	free_double_arr(ret);
+	identify(cmd->spl_input, cmd, envp);
 	return (cmd);
 }
 
-int	expand(char *str, t_cmd *cmd)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 1;
-	j = 0;
-	k = 0;
-	while (str[i])
-	{
-		while (str[i] >= '0' && str[i] <= '9')
-			i++;
-		if (str[i] >= 'a' && str[i] <= 'z')
-			return (0);
-		while (cmd->myenvp[j])
-		{
-			if ((ft_strncmp(cmd->myenvp[j], str + 1, ft_strlen(str + 1))) == 0)
-			{
-				if (cmd->myenvp[j][ft_strlen(str + 1)] == '=')
-				{
-					while (cmd->myenvp[j][k] != '=')
-						k++;
-					cmd->expansion = &cmd->myenvp[j][k + 1];
-					write(1, &cmd->expansion, ft_strlen(cmd->expansion));
-					break ;
-				}
-			}
-			cmd->expansion = " \n";
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-void	identify(char **input, t_cmd *cmd)
+void	identify(char **input, t_cmd *cmd, char **envp)
 {
 	int	i;
 	int	is_rec;
@@ -89,10 +51,7 @@ void	identify(char **input, t_cmd *cmd)
 			// printf("\t%s is a flag\n", cmd->flag);
 		}
 		else if (input[i][0] == '$')
-		{
- 
-			expand(input[i], cmd);
-		}
+			expand(input[i], cmd, envp);
 		else if (input[i][0] == '|')
 		{
 			printf("\tPIPE HAS BEEN HIT!\n");
@@ -111,13 +70,49 @@ void	identify(char **input, t_cmd *cmd)
 		}
 		i++;
 	}
-	if (is_builtin(cmd) == 1)
+	if (is_builtin(cmd, envp) == 1)
 	{
 		cmd->is_builtin = 1;
 		printf("\tand is a builtin!\n");
 	}
 	if (is_rec == 1)
-		identify(input + i + 1, cmd);
+		identify(input + i + 1, cmd, envp);
+}
+
+int	expand(char *str, t_cmd *cmd, char **envp)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 1;
+	j = 0;
+	k = 0;
+	while (str[i])
+	{
+		while (str[i] >= '0' && str[i] <= '9')
+			i++;
+		if (str[i] >= 'a' && str[i] <= 'z')
+			return (0);
+		while (envp[j])
+		{
+			if ((ft_strncmp(envp[j], str + 1, ft_strlen(str + 1))) == 0)
+			{
+				if (envp[j][ft_strlen(str + 1)] == '=')
+				{
+					while (envp[j][k] != '=')
+						k++;
+					cmd->expansion = &envp[j][k + 1];
+					break ;
+				}
+			}
+			cmd->expansion = " \n";
+			j++;
+		}
+		i++;
+	}
+	printf("%s", cmd->expansion);
+	return (1);
 }
 
 //CMD VALIDATION IS WAS IMPLEMENTED HERE, BUT WILL ULTIMATELY BE INSIDE THE PARSING, NOT LEXING!!!!!!!!
