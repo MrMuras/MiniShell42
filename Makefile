@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+         #
+#    By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 15:24:15 by snocita           #+#    #+#              #
-#    Updated: 2023/06/19 13:39:31 by snocita          ###   ########.fr        #
+#    Updated: 2023/06/19 20:44:32 by amurawsk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS	= src/main.c src/lexer.c src/parsing.c src/execution.c \
 			src/builtins/ft_echo.c src/builtins/ft_cd.c \
 			src/builtins/ft_pwd.c src/builtins/ft_env.c \
 			src/builtins/ft_export.c \
+			src/builtins/ft_exit.c \
 			src/utils.c
 SRC_DIR = src
 OBJS	= $(SRCS:.c=.o)

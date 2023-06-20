@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
+/*   By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:46:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/19 17:42:00 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/19 21:17:07 by amurawsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,19 @@ void	makefile(void)
 	execve("/usr/bin/make", (char *[]){"make", "re", NULL}, (char *[]){NULL});
 }
 
-t_cmd	*lexer(char *input, char **envp, t_cmd	*cmd)
+t_cmd	*lexer(char *input, t_cmd	*cmd)
 {
 	char	**ret;
 	int		i;
-	int		index;
 
-	(void)envp;
-	index = 0;
-	//cmd->myenvp = ft_double_strdup(envp);
 	if (strlen(input) == 0)
 		return (0);
-	if (strncmp(input, "exit", 4) == 0)
-		exit(0);
 	if (strncmp(input, "make", 4) == 0)
 		makefile();
 	ret = ft_split(input, ' ');
 	i = 0;
 	identify(ret, cmd);
-	free(ret);
+	free_double_arr(ret);
 	return (cmd);
 }
 
@@ -78,10 +72,8 @@ int	expand(char *str, t_cmd *cmd)
 void	identify(char **input, t_cmd *cmd)
 {
 	int	i;
-	int	j;
 	int	is_rec;
 
-	j = 0;
 	i = 0;
 	is_rec = 0;
 	while (input[i])
@@ -104,7 +96,7 @@ void	identify(char **input, t_cmd *cmd)
 		else if (input[i][0] == '|')
 		{
 			printf("\tPIPE HAS BEEN HIT!\n");
-			if (input[i + 1][j])
+			if (input[i + 1][0])
 			{
 				//WHAT ABOUT OUTPUT?
 				//printf("\tCATALISYS OF NEW PROGRAM\n");
@@ -114,7 +106,7 @@ void	identify(char **input, t_cmd *cmd)
 		}
 		else
 		{
-			cmd->args = strdup(input[i]);
+			cmd->args = input[i];
 			printf("\t%s is an argument\n", cmd->args);
 		}
 		i++;
