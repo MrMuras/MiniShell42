@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:42:42 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/20 20:03:19 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/21 16:38:04 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_cmd
 {
 	char	*cmd;
 	char	*flag;
-	char	*args;
+	char	**args;
 	char	*expansion;
 	int		is_builtin;
 	char	*path;

@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:12:18 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/15 17:50:41 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/21 16:41:56 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 //chdir cmd
 int	ft_cd(t_cmd	*cmd)
 {
-	if (chdir(cmd->args) > 0)
+	int	i;
+
+	i = 0;
+	if (chdir(cmd->args[i]) > 0)
 	{
 		printf("Path not findable");
 		return (0);

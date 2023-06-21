@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amurawsk <amurawsk@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 15:24:15 by snocita           #+#    #+#              #
-#    Updated: 2023/06/19 20:44:32 by amurawsk         ###   ########.fr        #
+#    Updated: 2023/06/21 17:14:41 by snocita          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,16 +34,14 @@ LIBFT_PATH	= ./headers/libft
 LIBFT		= $(LIBFT_PATH)/libft.a
 
 %.o: %.c
-		${CC} ${CFLAGS} -c $< -o $@
+		${CC} ${CFLAGS} -c $< -g -o $@
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ_DIR) $(OBJS) $(LIBFT) $(GNL)
 			cp $(LIBFT) .
 			cp $(GNL) . 
-			@$(CC) $(CFLAGS) $(OBJS) libft.a get_next_line.a -g -o $(NAME) -lreadline
-			mv src/*.o ./obj
-			mv src/builtins/*.o ./obj
+			@$(CC) $(CFLAGS) $(OBJS) libft.a get_next_line.a -o $(NAME) -lreadline
 
 $(OBJ_DIR):
 			mkdir $(OBJ_DIR)

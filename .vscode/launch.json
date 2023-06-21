@@ -1,0 +1,13 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+	  {
+		"name": "Launch",
+		"type": "lldb",
+		"request": "launch",
+		"program": "${workspaceFolder}/minishell",
+		"args": [],
+		"cwd": "/Users/snocita/Desktop/42_Projects/Core/MINITEST/MiniShell42",
+	  }
+	]
+  }

@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:51:31 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/20 20:21:58 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/21 18:25:10 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,41 @@
 t_cmd	*malloc_struct(void)
 {
 	t_cmd	*cmd;
+	int		i;
+	int		j;
 
+	i = 0;
 	cmd = malloc(sizeof(t_cmd));
 	if (!cmd)
-		return (0);
+		exit(1);
+	cmd->args = malloc(100 * sizeof(char *));
+	if (!cmd->args)
+	{
+		free(cmd);
+		exit(1);
+	}
+	while (i < 100)
+	{
+		cmd->args[i] = malloc(100 * sizeof(char));
+		if (!cmd->args[i])
+		{
+			j = 0;
+			while (j < i)
+			{
+				free(cmd->args[j]);
+				j++;
+			}
+			free(cmd->args);
+			free(cmd);
+			exit(1);
+		}
+		i++;
+	}
+	cmd->args[100] = NULL;
 	cmd->exit = 0;
-	return (cmd);
-}
 
-void	free_all(t_cmd	*cmd)
-{
-	free(cmd);
+	free(cmd->args);
+	return (cmd);
 }
 
 int	main(int ac, char **av, char **envp)

@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:51:48 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/20 20:44:15 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/21 18:14:57 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,19 @@
 
 int	ft_echo(t_cmd	*cmd)
 {
-	if (cmd->args == NULL)
+	int	i;
+
+	i = 0;
+	if (cmd->args[i] == NULL)
 		printf("\n");
 	else
-		printf("%s\n", cmd->args);
+	{
+		while (cmd->args[i] != NULL)
+		{
+			printf("%s\n", cmd->args[i]);
+			i++;
+		}
+	}
 	if (!(cmd->flag))
 		printf("\n");
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:18:05 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/20 19:50:56 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/21 16:44:02 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 void	update_envp(t_cmd	*cmd, char	**envp)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (envp[i])
 		i++;
-	envp[i++] = cmd->args;
+	while (cmd->args[j])
+		envp[i++] = cmd->args[j++];
 	envp[i++] = NULL;
 }
 
 int	ft_export(t_cmd	*cmd, char **envp)
 {
-	if (!(cmd->args))
+	if (!(cmd->args[0]))
 		return (0);
 	update_envp(cmd, envp);
 	return (1);
