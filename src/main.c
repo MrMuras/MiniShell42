@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:51:31 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/21 18:25:10 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/21 18:27:53 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_cmd	*malloc_struct(void)
 		}
 		i++;
 	}
-	cmd->args[100] = NULL;
+	cmd->args[99] = NULL;
 	cmd->exit = 0;
 
 	free(cmd->args);
