@@ -6,7 +6,7 @@
 #    By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/10 15:24:15 by snocita           #+#    #+#              #
-#    Updated: 2023/06/21 17:14:41 by snocita          ###   ########.fr        #
+#    Updated: 2023/06/21 19:49:13 by snocita          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,6 @@ SRC_DIR = src
 OBJS	= $(SRCS:.c=.o)
 OBJ_DIR = obj
 
-GNL_PATH = ./headers/gnl
-GNL = $(GNL_PATH)/get_next_line.a
-
 LIBFT_PATH	= ./headers/libft
 LIBFT		= $(LIBFT_PATH)/libft.a
 
@@ -40,18 +37,13 @@ all:	$(NAME)
 
 $(NAME):	$(OBJ_DIR) $(OBJS) $(LIBFT) $(GNL)
 			cp $(LIBFT) .
-			cp $(GNL) . 
-			@$(CC) $(CFLAGS) $(OBJS) libft.a get_next_line.a -o $(NAME) -lreadline
+			@$(CC) $(CFLAGS) $(OBJS) libft.a -o $(NAME) -lreadline
 
 $(OBJ_DIR):
 			mkdir $(OBJ_DIR)
 
-$(GNL):
-			make -sC $(GNL_PATH) all
-
 $(LIBFT):
 			make -sC $(LIBFT_PATH) all
-
 
 clean:
 		@$(RM) obj/

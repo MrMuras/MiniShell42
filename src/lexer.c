@@ -6,7 +6,7 @@
 /*   By: snocita <snocita@student.42wolfsburg.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:46:14 by snocita           #+#    #+#             */
-/*   Updated: 2023/06/21 18:13:02 by snocita          ###   ########.fr       */
+/*   Updated: 2023/06/21 19:47:35 by snocita          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ void	identify(char **input, t_cmd *cmd, char **envp)
 	is_rec = 0;
 	while (input[i])
 	{
+		if (is_builtin(cmd, envp) == 1)
+		{
+			cmd->is_builtin = 1;
+			printf("\tand is a builtin!\n");
+		}
 		if (i == 0)
 			cmd->cmd = input[i];
 		else if (i == 1 && input[i][0] == '-')
@@ -60,20 +65,17 @@ void	identify(char **input, t_cmd *cmd, char **envp)
 		{
 			if (j < 100)
 			{
-				cmd->args[j] = input[i];
-				j++;
+				if (input[i])
+				{
+					cmd->args[j] = input[i];
+					j++;
+					i++;
+				}
 			}
 			else
-			{
 				break ;
-			}
 		}
 		i++;
-	}
-	if (is_builtin(cmd, envp) == 1)
-	{
-		cmd->is_builtin = 1;
-		printf("\tand is a builtin!\n");
 	}
 	if (is_rec == 1)
 		identify(input + i + 1, cmd, envp);
